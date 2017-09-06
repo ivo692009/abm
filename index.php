@@ -5,7 +5,6 @@ require "layout_top.php";?>
         <fieldset>
             <legend>
                 <a href="alta.php">Alta Nuevo</a><br/>
-                <br/><br/>
 
                 <table>
                     <tr>
@@ -27,8 +26,8 @@ require "layout_top.php";?>
                         printf("<th>%s</th>", $p->descripcion);
                         ?>
 
-                        <th><a href="modificacion_vista.php?id=<?php echo $p->id ?>" name="id" value="<?php $id = $p->id ?>">Modificar</a></th>
-                        <th><a href="baja_vista.php?id=<?php echo $p->id ?>" name="id" value="<?php $id = $p->id ?>">Baja</a></th></tr><br/>
+                        <th><a href="modificacion.php?id=<?php echo $p->id ?>" name="id" value="<?php $id = $p->id ?>">Modificar</a></th>
+                        <th><a href="baja.php?id=<?php echo $p->id ?>" name="id" value="<?php $id = $p->id ?>">Baja</a></th></tr><br/>
                     <?php } ?>
                 </table>
             </legend>
