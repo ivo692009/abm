@@ -64,10 +64,11 @@ CREATE TABLE IF NOT EXISTS `nacionalidades` (
 --
 
 INSERT INTO `nacionalidades` (`id`, `descripcion`, `iso`) VALUES
+(0, 'ERROR', 'ER'),
 (1, 'Argentino', 'AR'),
 (2, 'Chileno', 'CL'),
-(5, 'Paraguayo', 'PY'),
-(6, 'Cubano', 'CU');
+(3, 'Paraguayo', 'PY'),
+(4, 'Cubano', 'CU');
 
 -- --------------------------------------------------------
 

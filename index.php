@@ -4,7 +4,7 @@ require "listado_index.php";
 require "layout_top.php";?>
         <fieldset>
             <legend>
-                <a href="alta_vista.php">Alta Nuevo</a><br/>
+                <a href="alta.php">Alta Nuevo</a><br/>
                 <br/><br/>
 
                 <table>
