@@ -1,15 +1,8 @@
 <?php
+/*
 session_start();
 
-if($_SESSION['modificacion'] != TRUE){
-        echo 'Usted no tiene permiso para esta operacion';
-        ?>
-        <html><a href="../vistas/index.php">volver al inicio</a><br><br></html>
-        <?php
-        die();
-}
-
-require __DIR__ . "/usuario.php";
+require "usuario.php";
 
 error_reporting(E_ALL);
 ini_set("display_errors", true);
@@ -56,3 +49,23 @@ try {
 }
 
 require __DIR__ . "/vistas/salida.php";
+*/
+
+require_once 'ClienteForm.php';
+    
+    $form = new ClienteForm();
+    
+    if (!empty($_GET)) {
+        $form->persona($_GET['id']);
+    }
+
+    if(!empty($_POST)) {    //venimos por post?
+
+        if($form->procesar($_POST)) {   //procesó OK?
+            $form->modif($_POST);
+            header("Location: ok.php"); //redirect
+            die();
+        }
+    }
+    
+    require "modificacion_vista.php";

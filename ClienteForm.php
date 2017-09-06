@@ -142,5 +142,10 @@
 
 		}
 
+		public function persona($id){
+
+
+			
+		}
     }
 
