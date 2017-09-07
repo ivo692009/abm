@@ -2,12 +2,6 @@
 <fieldset>
 	<legend>Procesar formulario</legend>
 	<form method="post" action="">
-	<div class="alert alert-danger">
-			1<?php
-                foreach ($persona as $p) {
-                    printf("%s %s %s", $p->nombre, $p->apellido, $p->fechnac);}
-            ?>2
-		</div>
 		<?php if($form->tieneErrores()):?>
 		<div class="alert alert-danger">
 			Se encontraron errores al procesar el formulario.

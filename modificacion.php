@@ -6,11 +6,8 @@ require_once 'ClienteForm.php';
     $form = new ClienteForm();
     
     if (!empty($_GET)) {
-        $_SESSION['id']=$_GET['id'];
-    }
-
-    if (!empty($_GET)) {
-        $persona = $form->persona_buscar();
+        $id=$_GET['id'];
+        require_once 'buscar_persona.php';
     }
 
     if(!empty($_POST)) {    //venimos por post?
