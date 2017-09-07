@@ -2,12 +2,17 @@
 <fieldset>
 	<legend>Procesar formulario</legend>
 	<form method="post" action="">
+	<div class="alert alert-danger">
+			1<?php
+                foreach ($persona as $p) {
+                    printf("%s %s %s", $p->nombre, $p->apellido, $p->fechnac);}
+            ?>2
+		</div>
 		<?php if($form->tieneErrores()):?>
 		<div class="alert alert-danger">
 			Se encontraron errores al procesar el formulario.
 		</div>
 		<?php endif;?>
-		
 		<?php $tiene_error = $form->tieneError('nombre') ? "has-error" : "";?>
 		<div class="form-group <?php echo $tiene_error;?>">
 			<label class="control-label" for="nombre">Nombre </label>

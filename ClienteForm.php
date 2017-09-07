@@ -38,10 +38,13 @@
 			}
 
 			//Solo Caracteres.
-			if(preg_match('/[^a-Z]/',$nombre)){	
-				$this->setError($campo, "Solo se permiten caracteres");
-				return;
-			}
+			$permitidos = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; 
+	   		for ($i=0; $i<strlen($nombre); $i++){ 
+	      		if (strpos($permitidos, substr($nombre,$i,1))===false){ 
+	         		$this->setError($campo, "Solo se permiten caracteres");
+	         		return false; 
+	      		} 
+   			} 
 
 		}
 		
@@ -54,7 +57,7 @@
 			}
 
 			//Opcion invalida
-			if ($categoria < 0 || $categoria > 3) {
+			if ($categoria < 0 || $categoria > 4) {
 				$this->setError($campo, "Opcion incorrecta, Fuera del rango permitido");
 			}
 
@@ -88,7 +91,6 @@
 
 		public function push(){
 
-			session_start();
 			require "usuario.php";
 
 			error_reporting(E_ALL);
@@ -107,8 +109,6 @@
 			else{
 				$estado_nuevo = 0;
 			}
-
-			header('Content-Type: text/html; charset=UTF-8');
 
 			try {
 
@@ -142,12 +142,12 @@
 
 		}
 
-		public function persona($id){
+		public function persona_buscar(){
 
 			require "usuario.php";
 			error_reporting(E_ALL);
 			ini_set("display_errors", true);
-			header('Content-Type: text/html; charset=UTF-8');
+
 			try {
 			    //Coneccion a la base de datos
 			    $pdo = new PDO('mysql:host=localhost;dbname=clientes_db', $usuario, $contraseña);
@@ -155,7 +155,7 @@
 			    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			    $pdo->exec("SET NAMES UTF8");
 			    //armamos el SQL
-			    $sql = "SELECT * FROM clientes WHERE id=:id";
+			    $sql = "SELECT * FROM `clientes` WHERE id=:id";
 			    //preparamos un statement con el sql anterior
 			    $stmt = $pdo->prepare($sql);
 			    //especificamos la salida como un array
@@ -170,11 +170,11 @@
 			    echo 'Error de la coneccion a la BD:' . $e->getMessage();
 			    die();
 			}
-
+			return $persona;
 			
 		}
 
-		public function modif(){
+		public function modif($id){
 
 			require "usuario.php";
 			error_reporting(E_ALL);
@@ -184,9 +184,13 @@
 			$apellido_nuevo = $_POST['apellido'];
 			$fechnac_nuevo = $_POST['fecha'];
 			$nacionalidad_id_nuevo = $_POST['categoria'];
-			$estado_nuevo = $_POST['vigente'];
-			$id = $_POST['id'];
-			header('Content-Type: text/html; charset=UTF-8');
+			if (!empty($_POST['vigente'])) {
+				$estado_nuevo = $_POST['vigente'];
+			}
+			else{
+				$estado_nuevo = 0;
+			}
+			//$id = $_POST['id'];
 			try {
 			    //Coneccion a la base de datos
 			    $pdo = new PDO('mysql:host=localhost;dbname=clientes_db', $usuario, $contraseña);

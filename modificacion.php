@@ -1,21 +1,22 @@
 <?php
-
+session_start();
 require_once 'ClienteForm.php';
     
+
     $form = new ClienteForm();
     
     if (!empty($_GET)) {
-        $id= $_GET['id'];
+        $_SESSION['id']=$_GET['id'];
     }
 
     if (!empty($_GET)) {
-        $form->persona($_GET['id']);
+        $persona = $form->persona_buscar();
     }
 
     if(!empty($_POST)) {    //venimos por post?
 
         if($form->procesar($_POST)) {   //procesó OK?
-            $form->modif($_POST);
+            $form->modif($_SESSION['id']);
             header("Location: ok.php"); //redirect
             die();
         }
